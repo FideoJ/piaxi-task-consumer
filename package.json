@@ -1,0 +1,28 @@
+{
+  "name": "piaxi-task-consumer",
+  "version": "0.1.0",
+  "description": "pia戏 任务处理器",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon --inspect=5858 ./src/index.js --exec node",
+    "start": "pm2 startOrRestart deploy/prod.json",
+    "lint": "eslint --ignore-pattern=*.json src/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:FideoJ/piaxi-task-consumer.git"
+  },
+  "author": "xiaodaolin",
+  "license": "MIT",
+  "homepage": "https://github.com/FideoJ/piaxi-task-consumer",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "redis": "^2.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "^1.11.0"
+  }
+}
