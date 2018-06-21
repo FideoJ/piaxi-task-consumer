@@ -8,8 +8,6 @@ module.exports = {
     host: 'localhost',
     port: '6379',
     db: 3,
-    // namespaces: {
-    //   session: 'piaxi-se:session',
-    // },
   },
+  workspace: '/tmp',
 };

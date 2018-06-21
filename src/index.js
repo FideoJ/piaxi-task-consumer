@@ -1,4 +1,6 @@
 const Driver = require('./driver');
 
 const driver = new Driver();
-driver.loop();
+driver.init().then(() => {
+  driver.loop();
+});

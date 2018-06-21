@@ -17,7 +17,8 @@
   "homepage": "https://github.com/FideoJ/piaxi-task-consumer",
   "dependencies": {
     "bluebird": "^3.4.1",
-    "redis": "^2.7.1"
+    "redis": "^2.7.1",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "eslint": "^4.3.0",

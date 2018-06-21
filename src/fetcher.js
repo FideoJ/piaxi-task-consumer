@@ -1,12 +1,6 @@
-const Promise = require('bluebird');
-const { ClientManager } = require('./services/redis');
-
-const { redis: redisConfig } = require('./config');
-
 class Fetcher {
-  constructor() {
-    const manager = new ClientManager();
-    this.client = manager.getClient(1);
+  constructor(redisClient) {
+    this.client = redisClient;
   }
 
   async retrieveTasks(type) {

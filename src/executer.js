@@ -3,15 +3,17 @@ const cp = Promise.promisifyAll(require('child_process'));
 const path = require('path');
 
 class Executer {
-  constructor() {}
+  constructor(workspace) {
+    this.workspace = workspace;
+  }
 
-  async execDubTask(voice, bgm, silent, subtitle, output, workspace) {
-    const middle0 = path.join(workspace, 'middle0.mp3');
+  async execDubTask(voice, bgm, silent, subtitle, output) {
+    const middle0 = path.join(this.workspace, 'middle0.mp3');
     if (voice && bgm) {
       await cp.execAsync(`ffmpeg -i ${voice} -i ${bgm} -filter_complex amix=input=2:duration=first:dropout_transition=3:weights='2 1' ${middle0}`);
     }
   
-    const middle1 = path.join(workspace, 'middle1.mkv');
+    const middle1 = path.join(this.workspace, 'middle1.mkv');
     if (silent && middle1) {
       await cp.execAsync(`ffmpeg -i ${silent} -i ${middle0} -vcodec copy -acodec copy ${middle1}`);
     }
@@ -29,7 +31,7 @@ class Executer {
 
   async execFakeTask(original, user_face, actor) {
     if (original && user_face && actor) {
-      await cp.execAsync(`echo ${original} ${user_face} ${actor} > /tmp/echo-${Date.now()}.log`);
+      await cp.execAsync(`bash /tmp/fakeTask.sh ${original} ${user_face} ${actor}`);
     }
   }
 }
