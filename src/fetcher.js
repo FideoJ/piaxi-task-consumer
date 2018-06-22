@@ -1,10 +1,12 @@
+const { redis: { namespace } } = require('./config');
+
 class Fetcher {
   constructor(redisClient) {
     this.client = redisClient;
   }
 
   async retrieveTasks(type) {
-    const keys = await this.client.keysAsync(`${type}*`);
+    const keys = await this.client.keysAsync(`${namespace.tasks}:${type}-*`);
     const tasks = [];
     let task;
     for (const key of keys) {

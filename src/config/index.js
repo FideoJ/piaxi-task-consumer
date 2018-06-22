@@ -1,8 +1,6 @@
-const { assign } = require('../utils');
-
 function getConfig() {
   const { NODE_ENV = 'development' } = process.env;
-  assign(process.env, { NODE_ENV });
+  Object.assign(process.env, { NODE_ENV });
   let config = null;
   switch (NODE_ENV) {
     case 'development':
