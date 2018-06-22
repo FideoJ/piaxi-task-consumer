@@ -1,11 +1,11 @@
 const redis = require('redis');
-const { redis: redisConfig } = require('../../config');
-const { logger, assign } = require('../../utils');
+const { redis: redisConfig } = require('../config');
+const { logger, assign } = require('../utils');
 const Promise = require('bluebird');
 
 Promise.promisifyAll(redis.RedisClient.prototype);
 
-class ClientManager {
+class RedisClientManager {
   constructor() {
     this.connections = [];
   }
@@ -15,13 +15,13 @@ class ClientManager {
     if (self.connections[id]) {
       return self.connections[id];
     }
-    const client = ClientManager.createClient(config);
+    const client = RedisClientManager.createClient(config);
     self.connections[id] = client;
     return client;
   }
 
   static createClient(config = {}) {
-    config = assign(ClientManager.getDefaultConfig(), config);
+    config = assign(RedisClientManager.getDefaultConfig(), config);
     const client = redis.createClient(config);
     client.on('error', (e) => {
       logger.error('[redis climgr] Redis 查询出错', e.stack);
@@ -34,4 +34,4 @@ class ClientManager {
   }
 }
 
-exports = module.exports = ClientManager;
+exports = module.exports = RedisClientManager;

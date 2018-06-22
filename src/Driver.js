@@ -1,12 +1,12 @@
 const Fetcher = require('./Fetcher');
 const Executer = require('./Executer');
-const { ClientManager } = require('./services/redis');
+const RedisClientManager = require('./services/RedisClientManager');
 const { workspace } = require('./config');
 const { logger, findTask, findLock } = require('./utils');
 
 class Driver {
   constructor() {
-    const manager = new ClientManager();
+    const manager = new RedisClientManager();
     const redisClient = manager.getClient(1);
     this.fetcher = new Fetcher(redisClient);
     this.executer = new Executer(workspace);

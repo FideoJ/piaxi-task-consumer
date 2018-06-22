@@ -4,7 +4,7 @@ const path = require('path');
 const Downloader = require('./Downloader');
 const Uploader = require('./Uploader');
 const {
-  fileName: { afterFace },
+  fileName: { afterFace, product },
   algorithm: { faceReplace, dub }
 } = require('./config');
 
@@ -37,7 +37,7 @@ class Executer {
       this.downloader.downloadAfterFaceOrVideo(works_id, video_id),
       this.downloader.downloadSubtitle(works_id),
     );
-    const output = path.join(this.workspace, works_id, afterDub);
+    const output = path.join(this.workspace, works_id, product);
     if (voice && bgm && video && subtitle) {
       await cp.execAsync(`${dub} ${voice} ${bgm} ${video} ${subtitle} ${output}`);
       await this.uploader.uploadAfterDub(works_id);

@@ -28,5 +28,8 @@ module.exports = {
     faceReplace: '/bin/faceReplace',
     dub: '/bin/dub',
   },
+  filer: {
+    url: 'https://piaxi-filer.resetbypear.com',
+  },
   workspace: '/tmp',
 };
