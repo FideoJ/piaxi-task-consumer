@@ -1,5 +1,5 @@
-const Fetcher = require('./fetcher');
-const Executer = require('./executer');
+const Fetcher = require('./Fetcher');
+const Executer = require('./Executer');
 const { ClientManager } = require('./services/redis');
 const { workspace } = require('./config');
 const { logger, findTask, findLock } = require('./utils');
@@ -56,7 +56,7 @@ class Driver {
       return;
 
     await this.setTaskState(task, 'running');
-    await this.executer.execFakeTask(...task.input);
+    await this.executer.execFakeTask(task);
     await this.setTaskState(task, 'finished');
   }
 
