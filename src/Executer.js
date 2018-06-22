@@ -5,7 +5,7 @@ const Downloader = require('./Downloader');
 const Uploader = require('./Uploader');
 const {
   fileName: { afterFace, product },
-  algorithm: { faceReplace, dub }
+  algorithm: { faceReplace, dub },
 } = require('./config');
 
 class Executer {
@@ -17,7 +17,7 @@ class Executer {
 
   async execFaceTask(faceTask) {
     const { video_id, works_id, extra: { role_id } } = faceTask;
-    const [ video, userFace, role ] = await Promise.all(
+    const [video, userFace, role] = await Promise.all(
       this.downloader.downloadVideo(video_id),
       this.downloader.downloadUserFace(works_id),
       this.downloader.downloadRole(role_id),
@@ -31,7 +31,7 @@ class Executer {
 
   async execDubTask(dubTask) {
     const { video_id, works_id, extra: { bgm_id } } = dubTask;
-    const [ voice, bgm, video, subtitle ] = await Promise.all(
+    const [voice, bgm, video, subtitle] = await Promise.all(
       this.downloader.downloadVoice(works_id),
       this.downloader.downloadBgm(bgm_id),
       this.downloader.downloadAfterFaceOrVideo(works_id, video_id),
