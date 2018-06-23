@@ -15,6 +15,18 @@ class Executer {
     this.uploader = new Uploader(workspace);
   }
 
+  async execTask(task) {
+    const { type } = task;
+    switch (type) {
+      case 'face':
+        return this.execFaceTask(task);
+      case 'dub':
+        return this.execDubTask(task);
+      default:
+        return Promise.reject(new Error('Not implemented'));
+    }
+  }
+
   async execFaceTask(faceTask) {
     const { video_id, works_id, extra: { role_id } } = faceTask;
     const [video, userFace, role] = await Promise.all(
@@ -42,11 +54,6 @@ class Executer {
       await cp.execAsync(`${dub} ${voice} ${bgm} ${video} ${subtitle} ${output}`);
       await this.uploader.uploadAfterDub(works_id);
     }
-  }
-
-  async execFakeTask(task) {
-    const { video_id, works_id } = task;
-    await cp.execAsync(`bash /tmp/fakeTask.sh ${video_id} ${works_id} ${this.workspace}`);
   }
 }
 

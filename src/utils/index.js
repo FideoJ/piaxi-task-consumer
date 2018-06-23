@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { redis: { namespace } } = require('../config');
+const { redis: { namespaces } } = require('../config');
 
 const logger = {
   log: (...args) => {
@@ -8,7 +8,7 @@ const logger = {
 };
 const { assign } = Object;
 
-const findTask = task => `${namespace.tasks}:${task.type}-${task.works_id}`;
-const findLock = task => `${namespace.lock}:${task.type}-${task.works_id}`;
+const findTask = task => `${namespaces.tasks}:${task.type}-${task.works_id}`;
+const findLock = task => `${namespaces.lock}:${task.type}-${task.works_id}`;
 
 exports = module.exports = { logger, assign, findTask, findLock };

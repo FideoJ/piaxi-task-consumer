@@ -7,11 +7,14 @@ module.exports = {
   redis: {
     host: 'localhost',
     port: '6379',
-    db: 2,
-    namespace: {
+    db: 1,
+    namespaces: {
       tasks: 'piaxi-tasks',
       lock: 'piaxi-task-lock',
     },
+  },
+  filer: {
+    url: 'https://piaxi-filer.resetbypear.com',
   },
   fileName: {
     original: 'original.mp4',
@@ -28,8 +31,6 @@ module.exports = {
     faceReplace: '/bin/faceReplace',
     dub: '/bin/dub',
   },
-  filer: {
-    url: 'https://piaxi-filer.resetbypear.com',
-  },
   workspace: '/tmp',
+  pollInterval: 1 * 1000,
 };
