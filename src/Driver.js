@@ -54,6 +54,7 @@ class Driver {
   }
 
   loop() {
+    logger.log('piaxi-task-consumer启动成功');
     setInterval(() => {
       this.tick();
     }, pollInterval);
