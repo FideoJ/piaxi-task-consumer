@@ -1,6 +1,7 @@
 const Filer = require('./services/Filer');
 const path = require('path');
 const fs = require('fs');
+const mkdirp = require('mkdirp-bluebird');
 const { fileName: { silent, userFace, role, voice, bgm, subtitle, afterFace, product } } = require('./config');
 
 class Downloader {
@@ -11,6 +12,8 @@ class Downloader {
   async downloadFile(prefix, id, fileName) {
     let filePath = path.join(prefix, id, fileName);
     const local = path.join(this.workspace, filePath);
+    const localDir = path.join(this.workspace, prefix, id);
+    await mkdirp(localDir);
     if (!fs.existsSync(local)) {
       if (fileName === afterFace) {
         filePath = path.join(prefix, id, product);
