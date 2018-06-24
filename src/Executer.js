@@ -34,7 +34,7 @@ class Executer {
       this.downloader.downloadUserFace(works_id),
       this.downloader.downloadRole(role_id),
     );
-    const output = path.join(this.workspace, works_id, afterFace);
+    const output = path.join(this.workspace, 'works', works_id, afterFace);
     if (video && userFace && role) {
       await cp.execAsync(`${faceReplace} ${video} ${userFace} ${role} ${output}`);
       await this.uploader.uploadAfterFace(works_id);
@@ -49,9 +49,10 @@ class Executer {
       this.downloader.downloadAfterFaceOrVideo(works_id, video_id),
       this.downloader.downloadSubtitle(works_id),
     );
-    const output = path.join(this.workspace, works_id, product);
+    const output = path.join(this.workspace, 'works', works_id, product);
+    const dubWorkDir = path.join(this.workspace, 'works', works_id);
     if (voice && bgm && video && subtitle) {
-      await cp.execAsync(`${dub} ${voice} ${bgm} ${video} ${subtitle} ${output}`);
+      await cp.execAsync(`${dub} ${voice} ${bgm} ${video} ${subtitle} ${output} ${dubWorkDir}`);
       await this.uploader.uploadAfterDub(works_id);
     }
   }
