@@ -9,6 +9,7 @@ class Uploader {
   }
 
   async uploadFile(prefix, id, fileName) {
+    id = `${id}`;
     let filePath = path.join(prefix, id, fileName);
     const local = path.join(this.workspace, filePath);
     if (fileName === afterFace)
