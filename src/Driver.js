@@ -14,6 +14,7 @@ class Driver {
   }
 
   async tick() {
+    logger.log('开始新一轮轮询...');
     const [faceTasks, dubTasks] = await Promise.all([
       this.fetcher.retrieveFaceTasks(),
       this.fetcher.retrieveDubTasks(),
@@ -55,7 +56,7 @@ class Driver {
 
   loop() {
     logger.log('piaxi-task-consumer启动成功');
-    setInterval(() => {
+    setTimeout(() => {
       this.tick();
     }, pollInterval);
   }
