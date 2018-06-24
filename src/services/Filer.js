@@ -1,7 +1,8 @@
-const request = require('request');
 const { filer } = require('../config');
-const pipeline = require('bluebird').promisify(require('stream').pipeline);
+const { promisify } = require('bluebird');
+const pipeline = promisify(require('stream').pipeline);
 const urljoin = require('url-join');
+const request = require('request');
 
 class Filer {
   static async download(filePath, stream) {
@@ -15,7 +16,19 @@ class Filer {
 
   static async upload(filePath, stream) {
     const remote = urljoin(filer.url, filePath);
-    return pipeline(stream, request.post(remote));
+    const options = {
+      url: remote,
+      formData: {
+        file: stream,
+      },
+    };
+    return new Promise((resolve, reject) => {
+      request.post(options, (err) => {
+        if (err)
+          reject(err);
+        resolve();
+      });
+    });
   }
 }
 
