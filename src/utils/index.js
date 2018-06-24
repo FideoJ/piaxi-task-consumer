@@ -1,9 +1,13 @@
 const moment = require('moment');
 const { redis: { namespaces } } = require('../config');
+const { NODE_ENV } = process.env;
 
 const logger = {
   log: (...args) => {
-    console.log(moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SSS '), ...args);
+    if (NODE_ENV === 'development')
+      console.log(moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SSS '), ...args);
+    else
+      console.log(...args);
   },
 };
 const { assign } = Object;
