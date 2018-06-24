@@ -35,8 +35,9 @@ class Executer {
       this.downloader.downloadRole(role_id),
     ]);
     const output = path.join(this.workspace, 'works', `${works_id}`, afterFace);
+    const faceWorkDir = path.join(this.workspace, 'works', `${works_id}`);
     if (video && userFace && role) {
-      await cp.execAsync(`${faceReplace} ${video} ${userFace} ${role} ${output}`);
+      await cp.execAsync(`${faceReplace} ${video} ${userFace} ${role} ${output} ${faceWorkDir}`);
       await this.uploader.uploadAfterFace(works_id);
     }
   }
